@@ -137,7 +137,7 @@ Looking at the vertex shader we can see that all it does it take the x and y coo
 
 Running this program we should end up with something like this:
 
-https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/hello_triangle.png?raw=true
+![https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/hello_triangle.png?raw=true]
 
 
 
