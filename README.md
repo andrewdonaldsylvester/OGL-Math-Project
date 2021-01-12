@@ -125,6 +125,7 @@ void main()
 {
    color = vec4(1.0f, 0.5f, 0.0f, 1.0f);
 }
+```
 
 A lot of this may look confusing but there are a few relevant parts to understanding how this works.
 
