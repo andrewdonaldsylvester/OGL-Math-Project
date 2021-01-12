@@ -108,11 +108,11 @@ vertexshader.glsl
 ```glsl
 #version 330 core
 
-in vec3 pos;
+in vec2 pos;
 
 void main()
 {
-    gl_Position = MVP * vec4(pos.x, pos.y, 0.0f, 1.0f);
+    gl_Position = vec4(pos.x, pos.y, 0.0f, 1.0f);
 }
 ```
 
@@ -127,8 +127,16 @@ void main()
    color = vec4(1.0f, 0.5f, 0.0f, 1.0f);
 }
 
-A lot of this may look confusing but the relavant parts to note are:
-*The vertices array on line 7. This defines the vertex x and y coordinates. 
+A lot of this may look confusing but there are a few relevant parts to understanding how this works.
+
+The vertices array on line 7 defines the vertex x and y coordinates. The coordinates range from -1 to 1 for the x and y axes. This coordinate system is called normalized device coordinates (NDC). 0, 0 would be in the center of the window, -1, -1 would be in the bottom left and 1, 1 would be in the top right.
+
+On line 59 we tell the program that this data comes in pairs of two, it now is able to pass the data to our shaders.
+
+Looking at the vertex shader we can see that all it does it take the x and y coordinates, sets their z coordinate to 0 because this is a 2D rendering, and it sets the fourth coordinate, w, to 1. This fourth coordinate is not relevant to this example but we will see it in use later on. The fragment shader doesn't modfiy anything with our position data, it never will, it is only used to determine the color of the vertices.
+
+Running this program we should end up with something like this:
+
 
 
 
