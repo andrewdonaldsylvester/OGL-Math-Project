@@ -77,7 +77,6 @@ int main()
     
     while(!glfwWindowShouldClose(window))
     {
-        process_input(window);
         
         // render here
         
