@@ -1,6 +1,14 @@
 # OGL-Math-Project
+Firstly, we must understand how graphics APIs work. The API used in this project is called OpenGL. It is a very popular API and it is supported on almost every operating system. 
+
+To demonstrate how the API is used we'll look at a basic script to render a triangle.
+
+hello_triangle.cpp
 
 ```cpp
+#include "shader_loading.hpp"
+
+
 int WINDOW_WIDTH = 800;
 int WINDOW_HEIGHT = 600;
 
@@ -94,3 +102,35 @@ int main()
     return 0;
 }
 ```
+And here's the shaders used:
+
+vertexshader.glsl
+```glsl
+#version 330 core
+
+in vec3 pos;
+
+void main()
+{
+    gl_Position = MVP * vec4(pos.x, pos.y, 0.0f, 1.0f);
+}
+```
+
+fragmentshader.glsl
+```glsl
+#version 330 core
+
+out vec4 color;
+
+void main()
+{
+   color = vec4(1.0f, 0.5f, 0.0f, 1.0f);
+}
+
+A lot of this may look confusing but the relavant parts to note are:
+*The vertices array on line 7. This defines the vertex x and y coordinates. 
+
+
+
+
+
