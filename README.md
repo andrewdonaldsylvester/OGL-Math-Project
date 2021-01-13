@@ -245,4 +245,4 @@ Finally we need the projection matrix to cast our camera view into NDC.
 
 ![Frustrum](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/camera_frustrum.gif)
 
-This shape, a frustrum, is the commonly used shape for virtual cameras. We need to project this into a 2 by 2 by 1 cube. There are a handful of ways to define the size of our frustrum but we will use four parameters: horizontal field of view (FoV), aspect ratio (width/height), near (the minimum distance to render objects at), and far (the maximum distance to render objects at). 
+This shape, a frustrum, is the commonly used shape for virtual cameras. There are a handful of ways to define the size of our frustrum but we will use four parameters: horizontal field of view (FoV), aspect ratio (width/height), near (the minimum distance to render objects at), and far (the maximum distance to render objects at). 
