@@ -295,3 +295,6 @@ void main()
 
 ```
         
+Here is the final result: 
+
+![Demo](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/ogl_math_demo.gif)
