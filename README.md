@@ -176,7 +176,9 @@ We'll come back to these in a bit because first, we have to derive the matrices 
 
 Homogenous coordinates:
 
-As you may recall, our vertex shader assigned our coordinates to a **four** dimensional vector instead of a 3d one. This is because OpenGL actually uses four properties for it's vertices. X and Y for screen positioning, Z for determining what objects to render in front of the others, and W which is set to 0 if the vector represents and direction, and is set to 1 if it represents a position. With this in mind, our first transformation matrix, the translation matrix, will be structured like this:
+Our vertex shader assigned our coordinates to a **four** dimensional vector instead of a 3d one. This is because OpenGL actually uses four properties for it's vertices. X and Y for screen positioning, Z for determining what objects to render in front of the others, and W which is set to 0 if the vector represents and direction, and is set to 1 if it represents a position.
+
+With this in mind, our first transformation matrix, the translation matrix, will be structured like this:
 
 ![Translation Matrix Unknown](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_unk.png)
 
@@ -247,3 +249,49 @@ Finally we need the projection matrix to cast our camera view into NDC.
 
 This shape, a frustrum, is the commonly used shape for virtual cameras. There are a handful of ways to define the size of our frustrum but we will use four parameters: horizontal field of view (FoV), aspect ratio (width/height), near (the minimum distance to render objects at), and far (the maximum distance to render objects at). 
 
+![Frustrum Diagram](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/frustrum_diagram.png)
+
+By observing this diagram we can see that our transformed x coordinate is proportial to cos(FOV) and inversely proportional to sin(FOV). This can be summed up by saying it is proportional to 1 / tan(FOV). Similarly our modified y coordinate is also proportional to 1 / tan(FOV) except this time we need to divide by our aspect ratio as well to keep it in proportion.
+
+Lastly we need map our z coordinate. This is very straightforward we just need to map from (near, far) to (0, 1). There is a simple equation for this. (n - current_min) * (new_max - new_min) / (current_max - current_min) + new_min. (z - near) / (far - near)
+
+Putting all this into our matrix we get:
+
+![Projection Matrix XYZ](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/projection_matrix_xyz.png)
+
+Lastly, we need shrink everything depending on how far away it is. OpenGL shaders automatically divide everything by w to normalize coordinates if it isn't already 1 or 0. So all we will need to do is set w to z.
+
+![Projection Matrix XYZW](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/projection_matrix_xyzw.png)
+
+And there we are! We just need to put all of these matrices together and send them to our shader and we should be able to view our scene in 3D! 
+
+```cpp
+glm::mat4 proj = projection(aspect_ratio, FOV, near, far);
+        
+glm::mat4 trans = translation(camera_pos.x, camera_pos.y, camera_pos.z);
+
+glm::mat4 rot = rotation(camera_rot.x, camera_rot.y, camera_rot.z);
+
+MVP = proj * rot * trans;
+
+glUseProgram(shader_program);
+
+glUniformMatrix4fv(MVP_location, 1, GL_FALSE, &MVP[0][0]);
+```
+
+Our new shader, including a spot for the matrix:
+
+```glsl
+#version 330 core
+
+layout (location = 0) in vec3 pos;
+
+uniform mat4 MVP;
+
+void main()
+{
+    gl_Position = MVP * vec4(pos.x, pos.y, pos.z, 1.0f);
+}
+
+```
+        
