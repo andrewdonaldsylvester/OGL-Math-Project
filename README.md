@@ -311,3 +311,5 @@ void main()
 Here is the final result: 
 
 ![Demo](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/ogl_math_demo.gif)
+
+Email me if you want to run the code on your computer and I can try and help compile it.
