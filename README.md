@@ -145,12 +145,37 @@ The first thing we need to address is our coordinate system. We'll need to add a
 
 ```cpp
 float vertices[] = {
-   0.0f, 0.0f,
-   1.0f, 0.0f,
-   0.5f, -0.5f
+   1.0f,  1.0f, -0.707f,
+  -1.0f,  1.0f, -0.707f,
+   0.0f,  2.0f,  0.707f,
+   0.0f,  0.0f,  0.707f
 };
 
 unsigned int indices[] = {
-    0, 1, 2
+    0, 1, 2,
+    0, 1, 3,
+    0, 2, 3,
+    1, 2, 3
 };
 ```
+
+Now that we've expanded our coordiante system to 3 coordinates and world coordinates that go infinitely in any direction, we need to come up with a way to decide what to render and where.
+
+The standard way of doing this is by using a virtual camera with a modifiable position and rotation. This way, we can move our camera around and obserce our 3D scene.
+
+To keep track of our camera position and rotation we'll use two 3d vectors to store these values.
+
+```cpp
+glm::vec3 camera_pos = vec3(0.0f);
+glm::vec3 camera_rot = vec3(0.0f);
+```
+
+We'll come back to these in a bit because first, we have to derive the matrices to do these transformations.
+
+
+
+Homogenous coordinates:
+
+As you may recall, our vertex shader assigned our coordinates to a **four** dimensional vector instead of a 3d one. This is because OpenGL actually uses four properties for it's vertices. X and Y for screen positioning, Z for determining what objects to render in front of the others, and W which is set to 0 if the vector represents and direction, and is set to 1 if it represents a position. With this in mind, our first transformation matrix, the translation matrix, will be structured like this:
+
+
