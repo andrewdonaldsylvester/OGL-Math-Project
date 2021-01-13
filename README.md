@@ -183,3 +183,7 @@ As you may recall, our vertex shader assigned our coordinates to a **four** dime
 And when we multiply by a direction, we don't want anything to change:
 
 ![Translation Matrix Unknown 2](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_unk_2.png)
+
+This is a pretty simple matrix to derive:
+
+![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_solved.png)
