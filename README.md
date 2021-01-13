@@ -139,6 +139,18 @@ Running this program we should end up with something like this:
 
 ![Hello Triangle Result](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/hello_triangle.png)
 
+This is nice but of course, this wouldn't be too exciting if we only did 2D. So we move to 3D.
 
+The first thing we need to address is our coordinate system. We'll need to add a third coordinate, Z. From now on our vertex data will be stored as 3 dimensional vectors with any rational numbers as their coordiantes. We'll replace our 2D triangle with a 3D tetrahedron. We also modify the indices array to tell the program which vertices to connect.
 
+```cpp
+float vertices[] = {
+   0.0f, 0.0f,
+   1.0f, 0.0f,
+   0.5f, -0.5f
+};
 
+unsigned int indices[] = {
+    0, 1, 2
+};
+```
