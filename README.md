@@ -190,8 +190,14 @@ This is a pretty simple matrix to derive:
 
 Now to move onto rotation. Again we want a 4x4 matrix that returns xyzw coordiantes but this time we want it to affect the vector whether or not w is 1. Here is the matrix for rotating a 2d point around the origin:
 
-![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/2d_rot_matrix.png)
+![2D Rotation Matrix](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/2d_rot_matrix.png)
 
 This can be put into a 4x4 matrix and it will still work with our homogenous world space coordinates.
 
-![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/2d_rot_matrix_4d.png)
+![Rotation Matrix Z](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_z.png)
+
+This matrix rotates around the z axis and we can create matrices to rotate around the x and y axes as well through simliar constructions.
+
+![Rotation Matrix X](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_x.png)
+
+![Rotation Matrix Y](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_y.png)
