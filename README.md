@@ -188,6 +188,21 @@ This is a pretty simple matrix to derive:
 
 ![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_solved.png)
 
+And here it is in code:
+
+```cpp
+glm::mat4 translation(float x, float y, float z)
+{
+    glm::mat4 m_translate = glm::mat4(1.0f);
+    
+    m_translate[3][0] = x;
+    m_translate[3][1] = y;
+    m_translate[3][2] = z;
+    
+    return m_translate;
+}
+```
+
 Now to move onto rotation. Again we want a 4x4 matrix that returns xyzw coordiantes but this time we want it to affect the vector whether or not w is 1. Here is the matrix for rotating a 2d point around the origin:
 
 ![2D Rotation Matrix](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/2d_rot_matrix.png)
