@@ -201,3 +201,27 @@ This matrix rotates around the z axis and we can create matrices to rotate aroun
 ![Rotation Matrix X](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_x.png)
 
 ![Rotation Matrix Y](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_y.png)
+
+Now that we have matrices for rotating around the x, y, and z axes, we can simply multiply them to get a matrix for rotating alpha degrees about x, beta degrees around y, and gamma degrees about z.
+
+Translating this into code we get this function:
+
+```cpp
+glm::mat4 rotation(float alpha, float beta, float gamma)
+{   
+    glm::mat4 m_alpha = glm::mat4(0.0f);             glm::mat4 m_beta = glm::mat4(0.0f);              glm::mat4 m_gamma = glm::mat4(0.0f);
+    
+    m_alpha[1][1] =  cos( glm::radians(alpha) );     m_beta[0][0] =  cos( glm::radians(beta) );       m_gamma[0][0] =  cos( glm::radians(gamma) );
+    m_alpha[2][1] = -sin( glm::radians(alpha) );     m_beta[2][0] = -sin( glm::radians(beta) );       m_gamma[1][0] = -sin( glm::radians(gamma) );
+    m_alpha[1][2] =  sin( glm::radians(alpha) );     m_beta[0][2] =  sin( glm::radians(beta) );       m_gamma[0][1] =  sin( glm::radians(gamma) );
+    m_alpha[2][2] =  cos( glm::radians(alpha) );     m_beta[2][2] =  cos( glm::radians(beta) );       m_gamma[1][1] =  cos( glm::radians(gamma) );
+    
+    m_alpha[0][0] = 1;                               m_beta[1][1] = 1;                                m_gamma[2][2] = 1;
+    m_alpha[3][3] = 1;                               m_beta[3][3] = 1;                                m_gamma[3][3] = 1;
+
+    glm::mat4 m_rotate = m_alpha * m_beta * m_gamma;
+    
+    return m_rotate;
+    
+}
+    ```
