@@ -178,4 +178,4 @@ Homogenous coordinates:
 
 As you may recall, our vertex shader assigned our coordinates to a **four** dimensional vector instead of a 3d one. This is because OpenGL actually uses four properties for it's vertices. X and Y for screen positioning, Z for determining what objects to render in front of the others, and W which is set to 0 if the vector represents and direction, and is set to 1 if it represents a position. With this in mind, our first transformation matrix, the translation matrix, will be structured like this:
 
-
+![Translation Matrix Unknown Variables] (https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_unk.png)
