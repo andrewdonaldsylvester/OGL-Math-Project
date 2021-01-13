@@ -187,3 +187,6 @@ And when we multiply by a direction, we don't want anything to change:
 This is a pretty simple matrix to derive:
 
 ![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_solved.png)
+
+Now to move onto rotation. Again we want a 4x4 matrix that returns xyzw coordiantes but this time we want it to affect the vector whether or not w is 1. Here is the matrix for rotating a 2d point around the origin:
+
