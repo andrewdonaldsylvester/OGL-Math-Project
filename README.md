@@ -150,7 +150,7 @@ Looking at the vertex shader we can see that all it does it take the x and y coo
 
 Running this program we should end up with something like this:
 
-![Hello Triangle Result](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/hello_triangle.png)
+![Hello Triangle Result](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/hello_triangle.png)
 
 This is nice but of course, this wouldn't be too exciting if we only did 2D. So we move to 3D.
 
@@ -193,15 +193,15 @@ Our vertex shader assigned our coordinates to a **four** dimensional vector inst
 
 With this in mind, our first transformation matrix, the translation matrix, will be structured like this:
 
-![Translation Matrix Unknown](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_unk.png)
+![Translation Matrix Unknown](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/transl_mat_unk.png)
 
 And when we multiply by a direction, we don't want anything to change:
 
-![Translation Matrix Unknown 2](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_unk_2.png)
+![Translation Matrix Unknown 2](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/transl_mat_unk_2.png)
 
 This is a pretty simple matrix to derive:
 
-![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/transl_mat_solved.png)
+![Translation Matrix Solved](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/transl_mat_solved.png)
 
 And here it is in code:
 
@@ -220,17 +220,17 @@ glm::mat4 translation(float x, float y, float z)
 
 Now to move onto rotation. Again we want a 4x4 matrix that returns xyzw coordiantes but this time we want it to affect the vector whether or not w is 1. Here is the matrix for rotating a 2d point around the origin:
 
-![2D Rotation Matrix](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/2d_rot_matrix.png)
+![2D Rotation Matrix](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/2d_rot_matrix.png)
 
 This can be put into a 4x4 matrix and it will still work with our homogenous world space coordinates.
 
-![Rotation Matrix Z](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_z.png)
+![Rotation Matrix Z](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/rot_matrix_z.png)
 
 This matrix rotates around the z axis and we can create matrices to rotate around the x and y axes as well through simliar constructions.
 
-![Rotation Matrix X](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_x.png)
+![Rotation Matrix X](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/rot_matrix_x.png)
 
-![Rotation Matrix Y](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/rot_matrix_y.png)
+![Rotation Matrix Y](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/rot_matrix_y.png)
 
 Now that we have matrices for rotating around the x, y, and z axes, we can simply multiply them to get a matrix for rotating alpha degrees about x, beta degrees around y, and gamma degrees about z.
 
@@ -258,11 +258,11 @@ glm::mat4 rotation(float alpha, float beta, float gamma)
 
 Finally we need the projection matrix to cast our camera view into NDC.
 
-![Frustrum](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/camera_frustrum.gif)
+![Frustrum](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/camera_frustrum.gif)
 
 This shape, a frustrum, is the commonly used shape for virtual cameras. There are a handful of ways to define the size of our frustrum but we will use four parameters: horizontal field of view (FoV), aspect ratio (width/height), near (the minimum distance to render objects at), and far (the maximum distance to render objects at). 
 
-![Frustrum Diagram](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/frustrum_diagram.png)
+![Frustrum Diagram](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/frustrum_diagram.png)
 
 By observing this diagram we can see that our transformed x coordinate is proportial to cos(FOV) and inversely proportional to sin(FOV). This can be summed up by saying it is proportional to 1 / tan(FOV). Similarly our modified y coordinate is also proportional to 1 / tan(FOV) except this time we need to divide by our aspect ratio as well to keep it in proportion.
 
@@ -270,11 +270,11 @@ Lastly we need map our z coordinate. This is very straightforward we just need t
 
 Putting all this into our matrix we get:
 
-![Projection Matrix XYZ](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/proj_matrix_xyz.png)
+![Projection Matrix XYZ](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/proj_matrix_xyz.png)
 
 Lastly, we need shrink everything depending on how far away it is. OpenGL shaders automatically divide everything by w to normalize coordinates if it isn't already 1 or 0. So all we will need to do is set w to z.
 
-![Projection Matrix XYZW](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/proj_matrix_xyzw.png)
+![Projection Matrix XYZW](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/proj_matrix_xyzw.png)
 
 And there we are! We just need to put all of these matrices together and send them to our shader and we should be able to view our scene in 3D! 
 
@@ -310,4 +310,4 @@ void main()
         
 Here is the final result: 
 
-![Demo](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/ogl_math_demo.gif)
+![Demo](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/Image/ogl_math_demo.gif)
