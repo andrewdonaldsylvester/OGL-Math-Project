@@ -1,4 +1,7 @@
 # OGL-Math-Project
+This project examines how linear algebra is used in the field of computer graphics to render 3 dimensional scenes.
+
+
 Firstly, we must understand how graphics APIs work. The API used in this project is called OpenGL. It is a very popular API and it is supported on almost every operating system. 
 
 To demonstrate how the API is used we'll look at a basic script to render a triangle.
@@ -129,9 +132,19 @@ void main()
 
 A lot of this may look confusing but there are a few relevant parts to understanding how this works.
 
-The vertices array on line 7 defines the vertex x and y coordinates. The coordinates range from -1 to 1 for the x and y axes. This coordinate system is called normalized device coordinates (NDC). 0, 0 would be in the center of the window, -1, -1 would be in the bottom left and 1, 1 would be in the top right.
+The vertices array
 
-On line 59 we tell the program that this data comes in pairs of two, it now is able to pass the data to our shaders.
+```cpp
+float vertices[] = {
+   0.0f, 0.0f,
+   1.0f, 0.0f,
+   0.5f, -0.5f
+};
+```
+
+defines the vertex x and y coordinates. The coordinates range from -1 to 1 for the x and y axes. This coordinate system is called normalized device coordinates (NDC). 0, 0 would be in the center of the window, -1, -1 would be in the bottom left and 1, 1 would be in the top right.
+
+After passing in our vertex data, our program runs it through 'shaders.' There are many types of shaders but we will only use 2 for this project. Vertex shaders -- which determine the position of vertices, and fragment shaders -- which determine the color of objects. Shaders are written with a language similar to C++ galled OpenGL Shader Language.
 
 Looking at the vertex shader we can see that all it does it take the x and y coordinates, sets their z coordinate to 0 because this is a 2D rendering, and it sets the fourth coordinate, w, to 1. This fourth coordinate is not relevant to this example but we will see it in use later on. The fragment shader doesn't modfiy anything with our position data, it never will, it is only used to determine the color of the vertices.
 
