@@ -257,11 +257,11 @@ Lastly we need map our z coordinate. This is very straightforward we just need t
 
 Putting all this into our matrix we get:
 
-![Projection Matrix XYZ](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/projection_matrix_xyz.png)
+![Projection Matrix XYZ](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/proj_matrix_xyz.png)
 
 Lastly, we need shrink everything depending on how far away it is. OpenGL shaders automatically divide everything by w to normalize coordinates if it isn't already 1 or 0. So all we will need to do is set w to z.
 
-![Projection Matrix XYZW](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/projection_matrix_xyzw.png)
+![Projection Matrix XYZW](https://github.com/andrewdonaldsylvester/OGL-Math-Project/blob/main/proj_matrix_xyzw.png)
 
 And there we are! We just need to put all of these matrices together and send them to our shader and we should be able to view our scene in 3D! 
 
@@ -279,7 +279,7 @@ glUseProgram(shader_program);
 glUniformMatrix4fv(MVP_location, 1, GL_FALSE, &MVP[0][0]);
 ```
 
-Our new shader, including a spot for the matrix:
+Our new shader, including the matrix transformation:
 
 ```glsl
 #version 330 core
